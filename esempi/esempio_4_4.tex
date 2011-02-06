@@ -1,0 +1,39 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[italian]{babel}
+\usepackage[utf8x]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{lipsum} 
+
+\usepackage[pdftex]{graphicx} % gestisce immagini e figure
+\usepackage{color} % permette di utilizzare i colori (necessario per Xfig) 
+
+
+\begin{document}
+
+
+\lipsum[1]
+\setlength{\unitlength}{3947sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(3400,2949)(663,-2998)
+{\color[rgb]{0,0,0}\thinlines
+\put(1276,-811){\circle{1210}}
+}%
+{\color[rgb]{0,0,0}\put(676,-2986){\framebox(3375,2925){}}
+}%
+\end{picture}%
+
+
+
+
+
+\lipsum[2]
+
+
+\end{document}

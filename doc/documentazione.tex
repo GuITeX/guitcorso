@@ -1,0 +1,374 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[italian]{babel}
+%\usepackage[utf8x]{inputenc}
+\usepackage[color]{guit}
+\usepackage{hyperref,indentfirst,fancyvrb,cclicenses,pifont,booktabs}
+
+\newcommand{\email}[1]{{\ttfamily <\href{mailto:#1}{#1}>}}
+
+\title{Introduzione al mondo di \LaTeX \\ Guida al corso} 
+
+\author{{\LARGE\GuIT} -- \GuITtext\thanks{Si sono occupati della
+realizzazione di questo lavoro: Maurizio W. Himmelmann
+\email{himmel@sssup.it}, Emiliano G.~Vavassori
+\email{testina@sssup.it} e Fabiano Busdraghi
+\email{fabusdr@yahoo.com}.}}
+\date{Versione 1.0 --- 31 agosto 2006}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+La presente guida illustra il materiale realizzato per il corso
+``Introduzione al mondo di  \LaTeX'' fornendo indicazioni sugli
+obiettivi, sullo svolgimento e sull'articolazione delle lezioni. Se ne
+consiglia caldamente la lettura prima di utilizzare il materiale.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Note di \textit{copyright}}\label{copy}
+Tutto il materiale del corso ``Introduzione al mondo di \LaTeX'' \`e
+rilasciato sotto licenza $\!$\cc$\!\!\!$ Creative Commons
+2.5\footnote{Il testo completo della licenza \`e disponibile, in
+inglese, alla pagina
+\url{http://creativecommons.org/licenses/by-nc-sa/2.5/legalcode}.}.
+
+\noindent\emph{Tu sei libero di:}
+\begin{dinglist}{227}
+    \item di riprodurre, distribuire, comunicare al pubblico, esporre
+	in pubblico, rappresentare, eseguire e recitare quest'opera;
+    \item di modificare quest'opera.
+\end{dinglist}
+
+\noindent\emph{Alle seguenti condizioni:}
+\begin{description}
+    \item[\ccby Attribuzione] Devi attribuire la paternit\`a
+	dell'opera nei modi indicati dall'autore o da chi ti ha dato
+	l'opera in licenza.
+    \item[\ccnc Non commerciale] Non puoi usare quest'opera per fini
+	commerciali.
+    \item[\ \ccsa\ \ $\!\!$Condividi allo stesso modo] Se alteri o
+	trasformi quest'opera, o se la usi per crearne un'altra, puoi
+	distribuire l'opera risultante solo con una licenza identica a
+	questa.
+\end{description}
+
+\begin{dinglist}{52}
+    \item Ogni volta che usi o distribuisci quest'opera, devi farlo
+	secondo i termini di questa licenza, che va comunicata con
+	chiarezza.
+    \item In ogni caso, puoi concordare col titolare dei diritti
+	d'autore utilizzi di quest'opera non consentiti da questa
+	licenza.
+\end{dinglist}
+
+Una ulteriore richiesta che gli autori aggiungono ai termini gi\`a
+previsti dalla licenza \`e quella di pubblicizzare l'attivit\`a del
+\GuITtext\ utilizzando la classe \textsf{guitbeamer}, appositamente
+predisposta da Emiliano G. Vavassori \cite{EVG}.
+\section{Obiettivi}
+Tra le diverse metodologie disponibili per la promuovere l'uso di
+\LaTeX, il suo insegnamento attraverso didattica frontale \`e a nostra
+esperienza quello che meglio aiuta il neofita a superare l'impatto
+iniziale e ad acquistare la necessaria sicurezza per perseverare
+nell'utilizzo. Tuttavia, se la vita del discente risulta enormemente
+semplificata dall'essere letteralmente condotto per mano,  altrettanto
+non pu\`o dirsi per il docente, il quale oltre alle energie necessarie
+per affrontare le fatiche della didattica, deve altres\`i investire
+una parte consistente del suo tempo per  la predisposizione del corso
+stesso (videoproiezioni, esempi pratici, manuali, ecc.).
+
+Proprio per agevolare chi abbia in animo di organizzare un corso ma
+non trovi il tempo e/o la voglia necessaria per allestire tutto il
+materiale, abbiamo deciso di condividere l'esperienza maturata in
+diversi corsi, svolti secondo schemi gi\`a testati e consolidati,
+rendendo pubblico tutto il materiale utilizzato. All'aspirante docente
+non rester\`a quindi altro impegno che studiare egli stesso il
+materiale fornito, adattandolo eventualmente alle proprie specifiche
+esigenze.
+
+\section{Articolazione del corso}
+
+Il corso \`e articolato in quattro lezioni ed \`e rivolto alle persone
+senza alcuna conoscenza pregressa di \LaTeX\ e che non possiedano
+altres\`i particolare dimestichezza coi linguaggi di programmazione.
+Esso pu\`o essere svolto sia per piattaforme Windows che *nix, essendo
+stato sperimentato con successo su entrambi i sistemi. Ogni singola
+lezione \`e stata rigorosamente tarata per avere una durata
+\textit{non superiore} ai 90 minuti (inclusi gli esempi pratici).
+Abbiamo resistito alla forte tentazione di aggiungere altro materiale,
+anzi talvolta effettuando la (dolorosa) scelta di eliminare alcune
+slide per rientrare nei tempi. L'articolazione e la durata delle
+lezioni privilegia infatti la fluidit\`a della trattazione
+focalizzando gli aspetti di concreto utilizzo e cercando di mantenere
+alta la curiosit\`a del discente attraverso l'uso di testi scritti da
+autori dalla proverbiale comicit\`a (\cite{BNN,ALL,JKJ}). Nella
+possibilit\`a in cui fosse possibile dilatare leggermente i tempi di
+ciascuna lezione, \`e possibile utilizzare le slide aggiuntive che nei
+sorgenti sono attualmente commentate. A voi l'ardua scelta di
+utilizzarle o meno, fermo restando il nostro consiglio di non
+aggiungere ulteriore materiale a quello originariamente previsto. 
+
+Per quanto riguarda l'editor la scelta \`e ricaduta su
+\textsf{Texmaker}\footnote{Disponibile all'indirizzo internet:
+\url{http://www.xm1math.net/texmaker/}} che viene rilasciato sotto
+licenza GNU/GPL. Nonostante alcuni limiti (dovuti verosimilmente alla
+giovinezza del progetto), ha tuttavia il grande pregio di essere
+disponibile per diverse piattaforme (Windows, *nix e MacOS). Questo
+ha permesso di ridurre i problemi di piattaforma, minimizzando la
+necessit\`a di dovere necessariamente usare uno specifico sistema
+operativo. 
+
+\subsection{Prima lezione}
+La prima lezione (\texttt{lezione\_1.pdf}) serve essenzialmente per
+introdurre la filosofia che sta alla base di \TeX\ e \LaTeX, secondo
+un approccio impostato pi\`u sulla strutturazione logico/formale del
+documento che sull'editing del testo. Dopo un breve cenno storico, si
+chiariscono i concetti fondamentali di \emph{compilazione} e
+\emph{codice sorgente}, dando illustrazione della struttura di un
+documento minimale. In parallelo alle slide in videoproiezione,
+vengono date dimostrazioni pratiche di alcuni editor (generalmente
+\textsf{WinEdt}, \textsf{TeXnicCenter} e \textsf{Texmaker} per
+piattaforma Windows e \textsf{Kile} e \textsf{Texmaker} per
+piattaforma *nix). \`E importante far terminare la lezione con alcuni
+esempi di compilazione di documenti minimali per dare da subito l'idea
+della semplicit\`a del processo di generazione del documento.
+	\begin{itemize}
+	\item \TeX\ e \LaTeX
+		\begin{itemize}
+		\item La storia di \TeX\ 
+		\item La compilazione di un documento
+		\end{itemize}
+	\item Cominciamo a lavorare
+		\begin{itemize}
+		\item La sintassi dei comandi
+		\item La struttura dei sorgenti
+		\end{itemize}
+	\item Perch\'e scegliere \LaTeX
+	\end{itemize}
+
+\subsection{Seconda lezione}
+Nel corso della seconda lezione (\texttt{lezione\_2.pdf}) si
+forniscono i principali elementi costituenti la struttura del
+documento, dando particolare risalto ai vantaggi che quest'approccio
+offre sia in termini operativi che di articolazione logica dei
+contenuti. Vengono date alcune prime indicazioni sui comandi
+fondamentali e sull'impaginazione del testo e vengono illustrati i
+riferimenti incrociati ed il loro utilizzo; si passa poi
+alla parte conclusiva della lezione in cui si forniscono le regole
+tipografiche di base per scrivere documenti non soltanto belli ma
+anche tipograficamente congruenti.
+	\begin{itemize}
+	\item Struttura del documento
+		\begin{itemize}
+	\item Sezionamento del testo
+		\item Elenchi puntati e numerati
+		\item Impaginazione con \LaTeX
+		\end{itemize}
+	\item Riferimenti incrociati
+	\item Norme tipografiche di base
+		\begin{itemize}
+		\item Evidenziare il testo
+		\item Sfizi tipografici
+		\item ``Dimensionare'' il testo
+		\end{itemize}
+	\end{itemize}
+
+\subsection{Terza lezione}
+La terza lezione (\texttt{lezione\_3.pdf}) costituisce probabilmente
+lo ``zoccolo duro'' dell'intero corso e per molti aspetti anche la
+parte pi\`u interessante. Vengono infatti esplorate le potenzialit\`a
+di \LaTeX\ nella stesura delle tabelle, anche stavolta dopo una breve
+introduzione sulle norme minimali in materia di tabelle. La lezione
+prosegue poi con le formule matematiche. La parte matematica di
+\LaTeX, vista la vastit\`a e l'importanza dell'argomento meriterebbe
+da sola un corso ad essa interamente dedicato. Tuttavia, volendo
+concentrarci su un pubblico generico e dalle eterogenee esigenze
+abbiamo preferito non soffermarci in modo troppo approfondito
+lasciando poi, a chi volesse, l'onore/onere di approfondire
+ulteriormente l'argomento. Per ultimo, ma non per questo meno
+importante, si descrivono le principali metodologie per realizzare la
+bibliografia e gli annessi riferimenti. 
+	\begin{itemize}
+	\item Oggetti flottanti
+	\item Tabelle
+		\begin{itemize}
+		\item Norme tipografiche per le tabelle
+		\item Tabulazione
+		\item Tabelle
+		\item Altri ambienti per le tabelle
+		\end{itemize}
+	\item Formule matematiche
+		\begin{itemize}
+		\item Nozioni di base
+		\item Scrivere formule matematiche
+		\item Ambienti matematici
+		\end{itemize}
+	\item Riferimenti bibliografici
+	\end{itemize}
+
+\subsection{Quarta lezione}
+L'ultima lezione (\texttt{lezione\_4.pdf}) si propone di completare
+tutti gli argomenti ``standard'' del corso. L'inserimento di figure,
+realizzate sia con altri programmi sia con l'ambiente \texttt{picture}
+completa il bagaglio minimale di conoscenza per potere cominciare a
+gestire autonomamente la creazione di un qualunque documento. Qualche
+minuto della lezione viene speso per introdurre il programma
+\textsf{Xfig} (o il suo porting su Windows:
+\textsf{Winfig}\footnote{Disponibili rispettivamente agli indirizzi
+internet: \url{http://www.xfig.org} e
+\url{http://www.schmidt-web-berlin.de/WinFIG.htm}}) che permette in
+modo facile ed intuitivo di ottenere direttamente il codice da
+inserire nel documento. La seconda fase della lezione, dando per
+scontato che l'allievo abbia gi\`a acquisito un minimo di esperienza,
+illustra due casi di utilizzo pratico di \LaTeX. La classe
+\textsf{beamer} per le videoproiezioni\cite{TAN} ed il pacchetto
+\textsf{europecv} per curriculum vit\ae\ (che implementa lo standard
+della Comunit\`a Europea \cite{VTC}) rappresentano due applicazioni di
+concreta utilit\`a per mettere subito in pratica quanto imparato. Il
+corso si conclude con qualche suggerimento sull'atteggiamento corretto
+per affrontare e superare gli inevitabili problemi e sui principali
+canali dove trovare informazioni.
+		\begin{itemize}
+		\item Figure ed immagini
+			\begin{itemize}
+			\item Il pacchetto \texttt{graphicx}
+			\item Tabulazione
+			\item Tabelle
+			\item Altri ambienti per le tabelle
+			\end{itemize}
+		\item Videoproiezioni
+			\begin{itemize}
+			\item Linee guida per le videoproiezioni
+			\item Sintassi di base
+			\end{itemize}
+		\item Curriculum Vitae
+			\begin{itemize}
+			\item Sintassi di base
+			\end{itemize}
+		\item Come sopravvivere a \LaTeX
+		\end{itemize}
+
+\subsection{Gli esempi}
+Tutte le lezioni sono corredate da 26 esempi, richiamati al momento
+opportuno della lezione, che hanno lo scopo di fornire al discente un
+immediato esempio pratico di quanto appena visto in forma teorica. Per
+rendere compatibile il materiale sia a piattaforma Windows che *nix,
+si \`e preferito scrivere il codice in ascii puro. Poich\'e nel
+preambolo sono sempre riportate le opzioni di \texttt{inputenc} per
+entrambi i sistemi operativi, \`e opportuno che il docente spenda due
+parole nella prima lezione su quale delle due opzioni utilizzare. 
+
+All'interno della cartella \texttt{come\_non\_presentare} sono acclusi
+anche tre esempi di come assolutamente \textit{non} vadano fatte le
+presentazioni a video. Non ce ne vogliano gli autori.
+
+\subsection{Codice sorgente e personalizzazione}
+\`E possibile personalizzare a vostro piacimento la presentazione a
+condizione di attenersi alle note sul \textit{copyright} (vedi \S
+\ref{copy}); in accordo con la filosofia \LaTeX, tutto il codice \`e
+stato infatti scritto cercando di agevolare quanto pi\`u possibile la
+personalizzazione. Per tutti i dettagli sulla sintassi si rimanda alla
+documentazione della classe \textsf{guitbeamer} realizzata da Emiliano
+G.~Vavassori appositamente per questo corso \cite{EVG}.
+
+\subsubsection{Pacchetti aggiuntivi e compatibilit\`a}
+Di seguito un elenco dei pacchetti che occorre installare per
+compilare correttamente le lezioni e gli annessi esempi.
+
+\begin{description}
+	\item[\texttt{amscd}:] permette la scrittura di diagrammi
+	    commutativi per l'esempio nella terza lezione;
+	\item[\texttt{breakurl}:] permette di spezzare gli URL troppo
+	    lunghi nelle citazioni bibliografiche;
+	\item[\texttt{color}:] permette l'uso di colori all'interno
+	    del documento;
+	\item[\texttt{colortbl}:] realizza le tabelle colorate nella
+	    terza lezione;
+	\item[\texttt{eurosym}:] realizza il simbolo dell'euro nella
+	    terza lezione;
+	\item[\texttt{lipsum}:] genera testo riempitivo, utilizzato in
+	    quasi tutti gli esempi;
+	\item[\texttt{longtable}:] realizza tabelle su pi\`u pagine
+	\item[\texttt{setspace}:] permette di personalizzare la
+	    spaziatura tra le righe di un documento per gli esempi
+	    della seconda lezione;
+	\item[\texttt{soul}:] permette di effettuare diversi tipi di
+	    sottolineature, usata opzionalmente negli esempi della
+	    seconda lezione; 
+	\item[\texttt{textcomp}:] supporto per l'encoding TS1
+	    necessari per la seconda lezione;
+	\item[\texttt{rotating}:] usato per ruotare oggetti nella
+	    terza e quarta lezione;
+	\item[\texttt{xy}:] realizza l'esempio nella terza lezione;
+\end{description}
+
+\subsection{Sviluppi}
+Ovviamente \`e pura utopia pensare di avere messo la parola fine ad un
+lavoro come questo. Ogni anno quando si pensava di avere gi\`a
+raggiunto un discreto livello di completezza del materiale,  sono
+sempre emersi nuovi argomenti meritori di essere integrati nel corso.
+Riteniamo pertanto utilissimi tutti i commenti e le proposte di
+miglioramento che vorrete farci pervenire\footnote{Scrivete a \GuIT\
+--- \GuITtext\ \email{guit@sssup.it}.} in modo da essere in grado di
+offrire un prodotto sempre valido ed aggiornato.
+
+\section{Ringraziamenti}
+Questo lavoro non sarebbe stato realizzato nella forma a voi visibile
+senza la speciale opera di Emanuele Vicentini che si \`e prestato con
+infinita pazienza e disponibilit\`a a soddisfare le nostre mille
+richieste di aiuto e di \textit{bug solving}. Emanuele, per quello che
+hai fatto troverai un giorno $100+70$ immacolati ringraziamenti ad
+attenderti \texttt{;-)}
+
+\begin{thebibliography}{666}
+\bibitem{ALL}
+	Allen, Woody.
+	\newblock \textit{Saperla lunga}.
+	\newblock Bompiani
+\bibitem{BNN}
+	Benni, Stefano.
+	\newblock \textit{Il dottor Ni\`u}.
+	\newblock Feltrinelli
+\bibitem{CAS}
+	Caschili, Massimo.
+	\newblock \textit{Semplici Figure con l'Ambiente Picture}.
+	\newblock  \Ars, 1/2006
+\bibitem{CEV}
+	Cevolani, Gustavo.
+	\newblock \textit{Norme Tipografiche per l'Italiano in \LaTeX}.
+	\newblock \Ars, 1/2006
+\bibitem{FER}
+	Fear, Simon.
+	\newblock \textit{Publication quality tables in \LaTeX}.
+	\newblock \url{http://www.ctan.org/tex-archive/macros/latex/contrib/booktabs/booktabs.pdf}
+\bibitem{GIN}
+	Gini, Rosa.
+	\newblock\textit{Corso \LaTeX, materiale del corso di R. Gini destinato al personale dell'Agenzia Regionale di Sanit\`a della Toscana}.
+	\newblock \url{http://www.guit.sssup.it/corsi/corso\_rosa.php/}
+\bibitem{JKJ}
+	Jerome K., Jerome.
+	\newblock \textit{Tre uomini in barca}.
+	\newblock Mondadori
+\bibitem{SYR}
+	Syropoulos, Apostolos; Tsolomitis, Antonis; Sofroniou, Nick.
+	\newblock \textit{Digital Typography using \LaTeX}.
+\bibitem{TAN}
+	Tantau, Till.
+	\newblock\textit{User's Guide to the Beamer Class}.
+	\newblock \url{http://latex-beamer.sourceforce.net/}
+\bibitem{EVG}
+	Vavassori, Emiliano.
+	\newblock\textit{La classe per presentazioni \textsf{guitbeamer}}.
+	\newblock
+	\url{http://tug.ctan.org/tex-archive/macros/latex/contrib/GuIT/guitbeamer/}
+\bibitem{VTC}
+	Vitacolonna, Nicola.
+	\newblock\textit{europecv an Unofficial Class for European Curricula}.
+	\newblock \url{http://www.ctan.org/tex-archive/macros/latex/contrib/europecv/}
+\end{thebibliography}
+
+
+\end{document}

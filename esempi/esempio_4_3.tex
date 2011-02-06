@@ -1,0 +1,28 @@
+\documentclass[a4paper,10pt]{report}
+
+\usepackage[italian]{babel}
+\usepackage[utf8x]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{lipsum} 
+
+\usepackage{graphicx} % gestisce immagini e figure
+\usepackage{float} % forza il posizionamento di oggetti flottanti
+
+\graphicspath{{img_esempi/}}
+
+\begin{document}
+
+
+\lipsum[1]
+
+\begin{figure}[htb]
+\centering
+	\includegraphics[bb= 0 0 100 120]{lion}
+	\caption{ciccio}
+\end{figure}
+
+
+\lipsum[2]
+
+
+\end{document}

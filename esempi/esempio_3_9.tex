@@ -1,0 +1,63 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[italian]{babel}
+\usepackage[utf8x]{inputenc}
+%\usepackage[latin1]{inputenc}
+
+\usepackage{amsmath}
+
+
+\begin{document}
+
+% esempio di equation
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, 
+\begin{displaymath} 
+	\begin{array}{l}
+		x+y+z=0\\
+		2x-y=1\\
+		y-4z=-3 
+	\end{array} 
+\end{displaymath} 
+adipiscing vitae, felis. Curabitur dictum gravida mauris.
+\begin{equation}
+	\begin{array}{l}
+		x+y+z=0\\
+		2x-y=1\\
+		y-4z=-3 
+	\end{array} 
+\end{equation}
+Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
+\begin{equation} 
+\left\{
+	\begin{array}{l}
+	x+y+z=0\\
+	2x-y=1\\
+	y-4z=-3 
+	\end{array} 
+\right. 
+\end{equation} 
+Donec vehicula augue eu neque.
+
+
+% % esempio di cases e multiline
+ 
+ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, 
+ \begin{displaymath}
+ f(n):=
+ 	\begin{cases} 
+ 	2n+1 & \text{se $n$ è dispari,}\\ 
+ 	n/2  & \text{se $n$ è pari.} \\
+ 	\end{cases}
+ \end{displaymath}
+ adipiscing vitae, felis. Curabitur dictum gravida mauris.
+ \begin{multline} 
+ 	f=a+b+c+d+e+g+h \\ 
+ 	+i+k+l+m+n+o+\\ 
+ 	+p+q+r+s+t+u+v 
+ \end{multline} 
+ Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
+
+
+
+\end{document}

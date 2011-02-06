@@ -1,0 +1,37 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[italian]{babel}
+\usepackage[utf8x]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{lipsum} 
+
+\usepackage{hyperref} % trasforma i riferimenti incrociati in link
+
+
+\begin{document}
+
+
+\chapter{Sagittis quis} 
+\lipsum[1-4]
+
+
+\section{Aliquet magna} \label{flag}
+
+\lipsum[1]
+
+
+
+\section{Lorem ipsum}
+\lipsum[1-2]
+
+\medskip
+
+Infatti come trattato nella Sezione \ref{flag} di pagina \pageref{flag} Catullo dice il seguente.
+
+\medskip
+
+\lipsum[1]
+
+
+
+\end{document}

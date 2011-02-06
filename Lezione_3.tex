@@ -1,0 +1,1721 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                              %
+%          GuIT - Gruppo Italiano Utilizzatori di TeX          %
+%                                                              %
+%          M. Himmelmann, E. Vavassori, F. Busdraghi           %
+%                                                              %
+%           ---  Introduzione al mondo di LaTeX  ---           %
+%                         Versione 1.1                         %
+%                                                              %
+%     Questo materiale è rilasciato sotto licenza CCPL 2.5     % 
+% Consultare la documentazione allegata per maggiori dettagli  %
+%                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% vim:sts=2:ts=2:tw=70
+\documentclass[svgnames,%
+	ucs,% Serve per l'encoding UTF8
+	pdftex]{guitbeamer}
+\usepackage[utf8x]{inputenc}
+\graphicspath{{img/}}
+
+\usepackage{setspace,textcomp}
+% pacchetti necessari per le slide
+\usepackage{rotating, longtable, color, eurosym}
+% \usepackage{amscd}
+% \usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage[all]{xy}
+
+\singlespacing
+
+% Titolo del corso, autore, data
+\title{Introduzione al mondo di \LaTeX}
+\author[Maurizio W.\,Himmelmann]{Maurizio W.\,Himmelmann}
+\date{10 dicembre 2009} % qui ci va anche l'evento
+
+% Si comincia :)
+\begin{document}
+
+% Pagina del titolo
+\frame{\titlepage}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Guide consigliate}
+	\begin{thebibliography}{Fer66}
+		\bibitem [Mori06]{Mori06}
+			Mori, Lapo
+			\newblock Tabelle su {\LaTeXe}: pacchetti e metodi da utilizzare.
+			\newblock \emph{Ars \TeX nica}, (2):31--47, ottobre 2006.
+		\bibitem [SF05]{FEA}
+			Fear, Simon.
+			\newblock\textit{Publication quality tables in \LaTeX}.
+		\bibitem [Mori08a]{Mori08a}
+			Guiggiani, M. e Mori, Lapo
+			\newblock Consigli su come \emph{non} maltrattare le formule matematiche.
+			\newblock \emph{Ars \TeX nica}, (5):5--14, aprile 2008.
+		\bibitem [Mori08b]{Mori08b}
+			Mori, Lapo
+			\newblock Gestire la bibliografia con {\LaTeX}.
+			\newblock \emph{Ars \TeX nica}, (6), ottobre 2008.
+	\end{thebibliography}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Piano della presentazione}
+  \tableofcontents
+\end{frame}
+%-----------------------------------------------------------
+%------------------------------------------------- SECTION -
+\section{Oggetti flottanti}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Oggetti flottanti}
+	In \LaTeX\ esiste la possibilit\`a di inserire oggetti (figure o tabelle) esattamente nel punto in cui essi sono posizionati nel testo.\\
+  \smallskip
+	Tuttavia questo \`e \textbf{da evitare}, perch\'e una delle peculiarit\`a di \LaTeX\ \`e la capacit\`a di inserire oggetti nel posto giudicato ottimale in base a precisi canoni tipografici.\\
+  \bigskip
+	Per questo tabelle e figure sono detti \textbf{oggetti mobili o flottanti} (\emph{floating}).
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Oggetti flottanti}
+	Posizionata all'interno di un oggetto flottante l'opzione:
+	\begin{LaTeXcode}
+		\tls htb\trs 
+	\end{LaTeXcode}	
+	Esprime la nostra preferenza circa la posizione nella pagina ove l'oggetto debba essere posizionato. 
+  \medskip
+	\begin{itemize}
+		\item \Lopt{h} posizionalo `qui' (\emph{here})
+		\item \Lopt{t} oppure posizionalo `in cima' (\emph{top})
+		\item \Lopt{b} o ancora possibile posizionalo `in fondo' (\emph{bottom}); 
+		\item \Lopt{p} o eventualmente posizionalo su una pagina dedicata a tutti gli oggetti \textit{float}; 
+	\end{itemize}
+	Naturalmente l'ordine \`e modificabile
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Oggetti flottanti}
+	Se si desidera posizionare l'oggetto nel punto esatto in cui si trova (da evitare assolutamente!) si pu\`o aggiungere un punto esclamativo
+	\begin{LaTeXcode}
+		\tls h!\trs 
+	\end{LaTeXcode}	
+  \medskip
+  \onslide<2->
+	Alternativamente si pu\`o usare il pacchetto \LCmd[]{float}
+	\begin{LaTeXcode}
+		\\usepackage\{\alert{float}\}
+	\end{LaTeXcode}	
+	\begin{LaTeXcode}
+		\tls H\trs
+	\end{LaTeXcode}	
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Raccomandazioni sul posizionamento}
+	\begin{center}
+		\textbf{Fidatevi di \LaTeX!}\\
+		Se fisicamente non c'\`e spazio inutile insistere.
+	\end{center}
+  \medskip
+	\begin{block}{Posizionamento ottimale}
+		\begin{itemize}
+			\item \Lopt{tb} per oggetti `normali'
+			\item \Lopt{p} per oggetti `grandi'
+		\end{itemize}
+	\end{block}
+	Fino ad aver completato il documento non preoccupatevi minimamente del posizionamento. In fase di revisione potete usare il pacchetto \Lsty{placeins}.
+\end{frame}
+%-----------------------------------------------------------
+%------------------------------------------------- SECTION -
+\section{Tabelle}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{A che punto siamo}
+  \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+%-----------------------------------------------------------
+%---------------------------------------------- SUBSECTION -
+\subsection{Norme tipografiche per le tabelle}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Il \textit{layout} di una tabella}
+	La tabella \`e un oggetto che \`e stato definito nel corso di secoli di esperienza e che dovrebbe essere alterato solo in circostanze eccezionali. Purtroppo talvolta capita di imbattersi in \textit{tableau} di questo tipo: 
+	\begin{LaTeXoutput}\centering
+		\begin{tabular}{||r|ll||} \hline
+		\multicolumn{1}{||c|}{topi}	& in salm\`i	& \euro{}13,65 \\ \cline{2-3}
+			& crudi		& ,50 \\ \hline
+		alce	& stufata	& 92,50 \\ \cline{1-1} \cline{3-3}
+		bradipi	&		& 33,333 \\ \hline
+		armadillo & congelato	& \multicolumn{1}{r||}{8,99} \\ \hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La struttura di una tabella formale}
+	La tabella risulta molto pi\`u chiara se si utilizzano solo righe orizzontali
+	\begin{LaTeXoutput}\centering
+		\begin{tabular}{@{}llr@{}} \hline
+		\multicolumn{2}{c}{Item} &  Prezzo (\euro{})\\\cline{1-2}
+		Animale & Descrizione	& \\ \hline
+		Topi	& in salm\`i	& 13,65 \\ 
+			& crudi		& 0,50 \\ 
+		Alce	& stufata	& 92,50 \\ 
+		Bradipi	&		& 33,33 \\ 
+		Armadillo & congelato	& 8,99 \\ \hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La struttura di una tabella formale}
+	Bastano poche regole per essere sicuri di non commettere errori:
+  \medskip
+	\begin{itemize}
+		\item \textbf{mai} usare \textbf{righe verticali} (meno che mai	doppie righe)
+		\item specificare sempre l'unit\`a  di misura nell'\textbf{intestazione} di colonna (mai nel corpo della tabella)
+		\item \textbf{allineare} i numeri a destra ed il testo a sinistra 
+		\item usare sempre lo stesso numero di decimali ed, ove occorra, farli precedere da uno zero (0,15 e \emph{non} ,15)
+		\item \textbf{mai} usare \textbf{virgolette} o segni di dubbia natura per ripetere un valore precedente (o riscrivere il valore o lasciare la cella bianca)
+	\end{itemize}
+\end{frame}
+%-----------------------------------------------------------
+%---------------------------------------------- SUBSECTION -
+\subsection{Tabulazione}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{A che punto siamo}
+  \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabulazione}
+	\begin{LaTeXcode}
+		\\begin\{tabular\}\{\alert{lr}\}\n
+		\hspace*{5ex}bianco \alert{\&} 102,5 \alert{\bs\bs}\n
+		\hspace*{5ex}nero   \alert{\&} 15,4 \alert{\bs\bs}\n
+		\\end\{tabular\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{tabular}{l r}
+		bianco & 102,5 \\
+		nero   & 15,4 \\
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+% -----------------------------------------------------------
+% --------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabulazione}
+	\begin{LaTeXcode}
+		\\begin\{tabular\}\{lr\}\
+		\alert{\\hline}\n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\alert{\\hline}\n
+		\\end\{tabular\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{tabular}{l r}
+		\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\
+		\hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabulazione}
+	\begin{LaTeXcode}
+		\\begin\{tabular\}\{lr\}\
+		\\hline \n
+		\alert{\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs} \
+		\\hline \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\hline\n
+		\\end\{tabular\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{tabular}{lr}\hline
+		\multicolumn{2}{c}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabulazione}
+	\begin{LaTeXcode}
+		\\begin\{tabular\}\{\alert{p\{3cm\}}r\}\
+		\\hline \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\\hline \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\hline\n
+		\\end\{tabular\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{tabular}{p{3cm}r}\hline
+		\multicolumn{2}{c}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabulazione}
+	\begin{LaTeXcode}
+		\\begin\{tabular\}\{\alert{p\{.3\\textwidth\}}r\}\
+		\\hline \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\\hline \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\hline\n
+		\\end\{tabular\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{tabular}{p{.3\textwidth}r}\hline
+		\multicolumn{2}{c}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Uso del \textit{pipe}}
+	Se proprio non potete evitare di inserire le righe verticali, usate il comando \LCmd[]{|} (\textit{pipe})
+	\begin{LaTeXcode}
+		\\begin\{tabular\}\{\alert{|}p\{.3\\textwidth\}\alert{|}r\alert{|}\}\
+		\\hline \n
+		\\multicolumn\{2\}\{\alert{|}c\alert{|}\}\{intestazione\}\bs\bs \
+		\\hline \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\hline\n
+		\\end\{tabular\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{tabular}{|p{.3\textwidth}|r|}\hline
+		\multicolumn{2}{|c|}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabulazione}
+	\begin{LaTeXcode}
+		\alert{\\begin\{center\}}\n
+		\\begin\{tabular\}\{p\{.3\\textwidth\}r|\}\
+		\\hline \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\\hline \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\hline\n
+		\\end\{tabular\}\n
+		\alert{\\end\{center\}}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+	  \begin{center}
+		\begin{tabular}{p{.3\textwidth}r}\hline
+		\multicolumn{2}{c}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+	  \end{center}
+	\end{LaTeXoutput}
+\end{frame}
+
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabulazione}
+	\begin{LaTeXcode}
+		\alert{\{\\centering}\n
+		\\begin\{tabular\}\{p\{.3\\textwidth\}r\}\
+		\\hline \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\\hline \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\hline\n
+		\\end\{tabular\}\n
+		\alert{\}}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}\centering
+		\begin{tabular}{p{.3\textwidth}r}\hline
+		\multicolumn{2}{c}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Righe con corretta spaziatura}
+	\begin{LaTeXcode}
+		\\begin\{tabular\}\{p\{.3\\textwidth\}r\}\
+		\alert{\\toprule} \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\alert{\\midrule} \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\alert{\\bottomrule}\n
+		\\end\{tabular\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}\centering
+		\begin{tabular}{p{.3\textwidth}r}\toprule
+		\multicolumn{2}{c}{intestazione}\\\midrule
+		bianco & 102,5 \\
+		nero   & 15,4 \\\bottomrule
+		\end{tabular}
+	\end{LaTeXoutput}
+  \bigskip
+	\begin{block}{Attenzione!}
+		Occorre caricare il pacchetto \Lsty{booktabs}
+	\end{block}
+
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+% \begin{frame}
+%   \frametitle{Colorare le righe}
+% 	\begin{LaTeXcode}
+% 		\\begin\{tabular\}\{p\{.3\\textwidth\}r\}\
+% 		\\hline \n
+% 		\hspace*{5ex}\alert{\\rowcolor[gray]\{.7\}} bianco \& 102,5 \bs\bs\n
+% 		\hspace*{5ex}\alert{\\rowcolor[gray]\{.8\}} nero   \& 15,4 \bs\bs\
+% 		\\hline\n
+% 		\\end\{tabular\}
+% 	\end{LaTeXcode}
+% 	\begin{LaTeXoutput}\centering
+% 		\begin{tabular}{p{.3\textwidth}r}\hline
+% 		\rowcolor[gray]{.7} bianco & 102,5 \\
+% 		\rowcolor[gray]{.8} nero   & 15,4 \\\hline
+% 		\end{tabular}
+% 	\end{LaTeXoutput}
+%   \onslide<2->
+% 	\begin{block}{Attenzione!}
+% 		\LCmd{rowcolor} richiede il pacchetto \LCmd[]{colortbl}
+% 	\end{block}
+% \end{frame}
+%-----------------------------------------------------------
+%---------------------------------------------- SUBSECTION -
+\subsection{Tabelle}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabella}
+	\begin{LaTeXcode}
+		\alert{\\begin\{table\}}\n
+		\\begin\{tabular\}\{p\{.3\\textwidth\}r\}\
+		\\hline \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\\hline \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\hline\n
+		\\end\{tabular\}\n
+		\alert{\\end\{table\}}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}\centering
+% 		\begin{table} % nel block l'ambiente table aggiunge un rigo a pi\'e di tabella :|
+		\begin{tabular}{p{.3\textwidth}r}\hline
+		\multicolumn{2}{c}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+% 		\end{table}
+	\end{LaTeXoutput}
+\end{frame}
+
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La tabella}
+	\begin{LaTeXcode}
+		\\begin\{table\}\alert{\tls htb\trs}\n
+		\\begin\{tabular\}\{p\{.3\\textwidth\}r\}\
+		\\toprule \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\\midrule \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\bottomrule\n
+		\\end\{tabular\}\n
+		\\end\{table\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}\centering
+% 		\begin{table} % nel block l'ambiente table aggiunge un rigo a pi\'e di tabella :|
+		\begin{tabular}{p{.3\textwidth}r}\hline
+		\multicolumn{2}{c}{intestazione}\\\hline
+		bianco & 102,5 \\
+		nero   & 15,4 \\\hline
+		\end{tabular}
+% 		\end{table}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La didascalia}
+	La didascalia si inserisce con il comando \LCmd{caption}, che come i comandi di sezionamento offre la possibilit\`a di specificare un titolo breve per l'indice delle figure.
+	\begin{LaTeXcode}
+		\alert{\\caption\{}Titolo della tabella\alert{\}}
+	\end{LaTeXcode}
+  \medskip
+ 	 Per citare l'oggetto flottante \`e sufficente inserire una \LCmd{label} \textbf{dopo} la \LCmd{caption}\\
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La didascalia della tabella}
+	\begin{LaTeXcode}
+		\\begin\{table\}[htb]\alert{\\caption\{titolo\}\\label\{ciccio\}}\n
+		\\begin\{tabular\}\{p\{.3\\textwidth\}r\}\
+		\\toprule \n
+		\\multicolumn\{2\}\{c\}\{intestazione\}\bs\bs \
+		\\midrule \n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\bottomrule\n
+		\\end\{tabular\}\n
+		\\end\{table\}
+	\end{LaTeXcode}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{La didascalia della tabella}
+	Ecco come appare la tabella 1
+	\begin{LaTeXoutput}
+	  \begin{center}
+		\begin{table}
+		\begin{tabular}{p{.3\textwidth}r}
+		\multicolumn{2}{c}{Tabella 1: titolo}\\[1ex]\toprule %block non digerisce \caption
+		\multicolumn{2}{c}{intestazione}\\\midrule
+		bianco & 102,5 \\
+		nero   & 15,4 \\\bottomrule
+		\end{tabular}
+		\end{table}
+	  \end{center}
+	\end{LaTeXoutput}
+  \bigskip
+	\begin{block}{Attenzione!}
+		Per modificare lo stile delle didascalie si usa il pacchetto \Lsty{caption}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Un esempio vale pi\`u di mille parole}
+	\begin{center}
+		\alert{\texttt{esempio\_3\_1.tex}}
+	\end{center}
+\end{frame}
+%-----------------------------------------------------------
+%---------------------------------------------- SUBSECTION -
+\subsection{Altri ambienti per tabelle}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{A che punto siamo}
+  \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Altri ambienti per tabelle}
+	Oltre all'ambiente \Lsty{table} esistono anche altri pacchetti per realizzare tabelle. Questi i pi\`u comuni:
+	\begin{itemize}
+		\item \Lsty{longtable}: tabelle che proseguono nella pagina successiva
+		\item \Lsty{sideways}: tabelle ruotate di 90$^{\circ}$ sulla pagina
+	\end{itemize}
+	I pacchetti specifici devono essere richiamati nel preambolo.
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Tabelle su pi\`u pagine}
+	Talvolta la tabella \`e cos\`i lunga che deve continuare nella pagina successiva
+	\begin{LaTeXcode}
+		\alert{\\begin\{longtable\}\{lr\}}\n
+		\\caption\{titolo\}\\label\{a\}\
+		\\toprule\n
+		\hspace*{5ex}bianco \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero   \& 15,4 \bs\bs\
+		\\bottomrule\n
+		\alert{\\end\{longtable\}}
+	\end{LaTeXcode}
+  \onslide<2->
+	\begin{block}{Attenzione!}
+		\`E necessario caricare il pacchetto \Lsty{longtable}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Tabelle su pi\`u pagine}
+	\begin{LaTeXoutput}
+		\begin{longtable}{lr}
+		\multicolumn{2}{c}{Tabella 1: titolo}\\[1ex]\hline %block non digerisce \caption
+		bianco		& 10,2 \\
+		nero		& 15,6 \\
+		giallo		& 16,6 \\
+		fucsia		& 15,7 \\
+		cremisi		& 12,2 \\
+		amaranto	& 18,3 \\
+		verde		& 11,5 \\
+		grigio		& 15,3 \\
+		viola		& 19,9 \\
+		blu		& 14,7 \\
+		azzurro		& 16,3 
+		\end{longtable}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Tabelle su pi\`u pagine}
+	\begin{LaTeXoutput}
+		\begin{longtable}{lr} % andr\`o all'inferno per questo :\ ma block non capisce longtable
+		rosso		& 14,4 \\
+		marrone		& 17,7 \\
+		rosa		& 12,9 \\
+		ocra		& 19,2 \\
+		arancione	& 11,8 \\
+		porpora		& 14,6 \\
+		celeste		& 12,9 \\
+		antracite	& 15,1 \\
+		\hline
+		\end{longtable}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Ruotare le tabelle}
+	\begin{LaTeXcode}
+		\alert{\\begin\{sideways\}}\n
+		\\begin\{tabular\}\{lr\}\
+		\\toprule\n
+		\hspace*{5ex}bianco    \& 102,5 \bs\bs\n
+		\hspace*{5ex}nero      \& 15,4 \bs\bs\n
+		\hspace*{10ex}\vdots\n
+		\hspace*{5ex}antracite \& 15,1 \bs\bs\\bottomrule\n
+		\\end\{tabular\}\n
+		\alert{\\end\{sideways\}}
+	\end{LaTeXcode}
+\end{frame}
+% -----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Ruotare le tabelle}
+	\begin{LaTeXoutput}
+		\begin{sideways}
+		\begin{tabular}{lr}\\\toprule
+		bianco 		& 10,2 \\
+		nero   		& 15,6 \\
+		giallo		& 16,6 \\
+		fucsia		& 15,7 \\
+		cremisi		& 12,2 \\
+		amaranto	& 18,3 \\
+		verde		& 11,5 \\
+		grigio		& 15,3 \\
+		viola		& 19,9 \\
+		blu		& 14,7 \\
+		rosso		& 14,4 \\
+		marrone		& 17,7 \\
+		rosa		& 12,9 \\
+		ocra		& 19,2 \\
+		arancione	& 11,8 \\
+		porpora		& 14,6 \\
+		celeste		& 12,9 \\
+		antracite	& 15,1 \\
+		\bottomrule
+		\end{tabular}
+		\end{sideways}
+	\end{LaTeXoutput}
+  \onslide<2->
+	\begin{block}{Attenzione!}
+		Per ruotare degli oggetti, \`e necessario caricare il pacchetto \Lsty{rotating}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Due esempi son meglio di uno}
+	\begin{center}
+		\alert{\texttt{esempio\_3\_2.tex}}\\
+		\alert{\texttt{esempio\_3\_3.tex}}
+	\end{center}
+\end{frame}
+% -----------------------------------------------------------
+% ------------------------------------------------- SECTION -
+\section{Formule matematiche}
+%-----------------------------------------------------------
+%---------------------------------------------- SUBSECTION -
+\subsection{Nozioni di base}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{A che punto siamo}
+  \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+%------------------------------------------------------------
+%--------------------------------------------------- SLIDE - 
+\begin{frame}
+  \frametitle{L'arte della tipografia matematica}
+	Generalmente la scrittura di formule matematiche costituisce la parte pi\`u complessa e delicata della stesura di un documento. Proprio in questo particolare ambito, \LaTeX\ offre una qualit\`a tipografica allo stato dell'arte.\\
+  \medskip
+	La sintassi per la scrittura di formule matematiche non \`e assolutamente difficile e richiede appena un minimo di pratica.
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Scrivere le formule nel testo}
+	\LaTeX\ applica parecchia cura nella spaziatura nelle formule, anche quando esse sono molto semplici. Ecco un cattivo esempio di come non vanno scritte:
+	\begin{LaTeXcode}
+		Non \`e vero che 7+2=9 e 7-3=4, sono solo bugie.
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		Non \`e vero che 7+2=9 e 7-3=4,  sono solo bugie.
+	\end{LaTeXoutput}
+  \smallskip
+  \onslide<2->
+	Il modo corretto di scrivere le formule all'interno del testo \`e quello di inserirle tra due \LCmd[]{\textdollar}\dots\LCmd[]{\textdollar}
+	\begin{LaTeXcode}
+		Non \`e vero che \alert{\$7+2=9\$} e \alert{\$7-3=4\$} sono solo bugie.
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		Non \`e vero che $7+2=9$ e $7-3=4$, sono solo bugie.
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Scrivere le formule nel testo}
+	Se si inserisce la formula nel testo \LaTeX\ cerca di schiacciarla per non aumentare l'interlinea.
+	\begin{LaTeXcode}
+		Dopo lunghi studi, Livsi\\v\{c\} \ Vr\\o dstadt riusc\`i a dimostrare che poich\'e \alert{\$\\sum\_\{i=1\}\textasciicircum n a\_i=3\$} la figura di Carducci \`e imponentemente stagliata nel panorama poetico del suo tempo.
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		Dopo lunghi studi, Livsi\v{c} Vr\o dstadt riusc\`i a dimostrare che poich\'e $\sum_{i=1}^n a_i=3$ la figura di Carducci \`e imponentemente stagliata nel panorama poetico del suo tempo.
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Centrare le formule}
+	Per centrare la formula su una riga occorre inserira tra \LCmd[]{\\[}\dots\LCmd[]{\\]} In questo caso lo sviluppo verticale sar\`a maggiore
+	\begin{LaTeXcode}
+		Livsi\\v\{c\} \ Vr\\o dstadt riusc\`i a dimostrare che poich\'e
+		\alert{\\[\\sum\_\{i=1\}\textasciicircum n a\_i\\]} la figura di Carducci \`e imponentemente stagliata nel panorama poetico del suo tempo. 
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		Livsi\v{c} Vr\o dstadt riusc\`i a dimostrare che poich\`e
+			\[\sum_{i=1}^n a_i=3\]
+		la figura di Carducci \`e imponentemente stagliata nel panorama poetico del suo tempo. 
+	\end{LaTeXoutput}
+\end{frame}
+% %-----------------------------------------------------------
+% %--------------------------------------------------- SLIDE -
+% \begin{frame}
+%   \frametitle{Centrare le formule}
+% 	Per centrare la formula su una riga si usa l'ambiente \LCmd[]{displaymath} 
+% 	\begin{LaTeXcode}
+% 	Dimostrare che la formula:\n
+% 		\alert{\\begin\{displaymath\}}\n
+% 			\hspace*{5ex}\\prod\\theta\textasciicircum\{\\psi\}-45x\n
+% 		\alert{\\end\{displaymath\}}\n
+% 	non significa assolutamente nulla.
+% 	\end{LaTeXcode}
+% 	\begin{LaTeXoutput}
+% 	Dimostrare che la formula:
+% 		\begin{displaymath}
+% 			\prod\theta^{\psi}-45x 
+% 		\end{displaymath} 
+% 	non significa assolutamente nulla.
+% 	\end{LaTeXoutput}
+% \end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+% \begin{frame}
+%   \frametitle{Un esempio vale pi\`u di mille parole}
+% 	\begin{center}
+% 		\alert{\texttt{esempio\_3\_4.tex}}
+% 	\end{center}
+% \end{frame}
+%-----------------------------------------------------------
+%---------------------------------------------- SUBSECTION -
+\subsection{Scrivere formule matematiche}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{A che punto siamo}
+  \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Esponenti}
+	Per inserire un esponente si usa il comando \LCmd[]{\textasciicircum} (accento circonflesso o \textit{circum})
+ 	\begin{LaTeXcode}
+		\$x\alert{\textasciicircum}y\$
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		$x^y$
+	\end{LaTeXoutput}
+	Nel caso di esponenti pi\`u complessi si ricorre alle parentesi
+ 	\begin{LaTeXcode}
+		\$x\textasciicircum \alert{\{y+1\}}\$
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		$x^{y+1}$
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Esponenti in modalit\`a testo}
+	Il \LaTeX\ esiste anche la possibilit\`a di scrivere esponenti fuori dal contesto di ambienti matematici con il comando \LCmd{textsuperscript} 
+ 	\begin{LaTeXcode}
+		Ciccio\alert{\\textsuperscript\{}\\textregistered\alert{\}}
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		Ciccio\textsuperscript{\textregistered}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Indici}
+	Per inserire un indice si usa il comando \LCmd[]{\textunderscore} (\textit{underscore})
+ 	\begin{LaTeXcode}
+		\$x\alert{\textunderscore}y\$
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		$x_y$
+	\end{LaTeXoutput}
+	Nel caso di indici multipli si ricorre alle parentesi annidate
+ 	\begin{LaTeXcode}
+		x\_\{n\_\{\alert{k\_\{i\}}\}\}
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		$x_{n_{k_{i}}}$
+	\end{LaTeXoutput}
+	I caratteri diventano via via sempre pi\`u piccoli
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Frazioni}
+	Per inserire una frazione si usa il comando \LCmd{frac}
+	\begin{LaTeXcode}
+		\\[\n
+    \hspace*{5ex}\alert{\\frac\{1\}\{a+1\}}\n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\frac{1}{a+1}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Frazioni}
+	Il comando \LCmd{frac} pu\`o anche essere annidato
+	\begin{LaTeXcode}
+		\\[\n
+    \alert{\\frac}\{x+\alert{\\frac\{1\}\{x\}}\}\{y+\alert{\\frac\{1\}\{y\}}\}\n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\frac{x+\frac{1}{x}}{y+\frac{1}{y}}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Radici}
+	Per scrivere la radice si usa il comando \LCmd{sqrt}
+ 	\begin{LaTeXcode}
+		\\[\n
+		\hspace*{5ex}\alert{\\sqrt}[n+1]\{\bs chi + x\}\n
+		\\]
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\sqrt[n+1]{\chi + x}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Sommatorie}
+	Il simbolo di sommatoria si scrive con il comando \LCmd{sum}
+ 	\begin{LaTeXcode}
+		\\[\n
+		\hspace*{5ex}\alert{\\sum}\_\{i=1\}\textasciicircum \{\\infty\}\n
+		\\]
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\sum_{i=1}^{\infty}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Limiti}
+	I limiti si scrivono con il comando \LCmd{lim}
+ 	\begin{LaTeXcode}
+		\\[\n
+		\hspace*{5ex}\alert{\\lim}\_\{i \\to \\infty\}\n
+		\\]
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\lim_{i \to \infty}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Integrali}
+	Il segno di integrale si scrive con il comando \LCmd{int}\\
+ 	\begin{LaTeXcode}
+		\\[\n
+		\hspace*{5ex}\alert{\\int}\_\{a+1\}\textasciicircum \{b+1\}x\bs,dx\n
+		\\]
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\int_{a+1}^{b+1}x\,dx
+		\]
+	\end{LaTeXoutput}
+  \onslide<2->
+	\begin{block}{Attenzione!}
+	il \LCmd{,} serve per inserire uno spazio prima del \textrm{\textit{dx}}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+% \begin{frame}
+%   \frametitle{Un esempio vale pi\`u di mille parole}
+% 	\begin{center}
+% 		\alert{\texttt{esempio\_3\_5.tex}}
+% 	\end{center}
+% \end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Operatori seno e coseno}
+	\emph{seno} e \emph{coseno} si scrivono con i comandi \LCmd{sin} e \LCmd{cos}
+	\begin{LaTeXcode}
+		\\[\n
+		 \hspace*{5ex}\alert{\\cos}2x=\\frac\{1-\alert{\\sin}\textasciicircum2x\}\{2\}\n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\cos2x=\frac{1-\sin^2x}{2}
+		\]
+	\end{LaTeXoutput}
+  \bigskip
+	\medskip Le espressioni \LCmd{sin\textasciicircum2x} e  \LCmd{sin\textasciicircum\{2\}x} sono identiche
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Operatori seno e coseno in italiano}
+	Se si vuole \emph{sen x} in italiano, bisogna aggiungere nel preambolo:
+	\begin{LaTeXcode}
+		\\DeclareMathOperator\{\\sen\}\{sen\}
+	\end{LaTeXcode}
+	\medskip Poi basta scrivere \LCmd{sen\{x\}}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Testo dentro una formula}
+	Nel caso in cui occorra inserire del testo all'interno di una formula quest'ultimo deve essere dichiarato con il comando \LCmd{text}
+ 	\begin{LaTeXcode}
+		\\[\n
+		\hspace*{5ex}\\forall x\\in\\phi\alert{\\text\{\ noi abbiamo che \}}x\textasciicircum\{2\}=1\n
+		\\]
+ 	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\forall x\in\phi\text{ noi abbiamo che } x^{2}=1
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+% \begin{frame}
+%   \frametitle{Un esempio vale pi\`u di mille parole}
+% 	\begin{center}
+% 		\alert{\texttt{esempio\_3\_6.tex}}
+% 	\end{center}
+% \end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Parentesi a dimensione fissa}
+	Posso usare parentesi di diverse dimensioni:
+  \begin{columns}
+  \column[t]{.4\textwidth}
+	\begin{LaTeXcode}
+		\LCmd[]{(} x \LCmd[]{)}\n
+		\LCmd{\alert{bigl}(} x \LCmd{bigr)}\vspace{1.1ex}\n
+		\LCmd{\alert{Bigl}(} x \LCmd{Bigr)}\vspace{2.2ex}\n
+		\LCmd{\alert{biggr}(} x \LCmd{biggr)}\vspace{3ex}\n
+		\LCmd{\alert{Biggr}(} x \LCmd{Biggr)}\n
+	\end{LaTeXcode}
+  \column[t]{.4\textwidth}
+	\begin{LaTeXoutput}
+		$( x )$\\
+		$\bigl( x\bigr)$\\
+		$\Bigl( x \Bigr) $\\
+		$\biggr( x \biggr) $\\
+		$\Biggr( x \Biggr)$
+	\end{LaTeXoutput}
+  \end{columns}
+  \bigskip
+	Da utilizzare per le formule ordinarie
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Parentesi a dimensione fissa}
+	Un esempio di parentesi grande
+	\begin{LaTeXcode}
+		\\[\n
+		 \hspace*{5ex}\alert{\\Biggl(}\\frac\{1\}\{n+1\}\alert{\\Biggr)}\textasciicircum 2\n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\Biggl(\frac{1}{n+1}\Biggr)^2
+		\]
+	\end{LaTeXoutput}
+	Ovviamente \LCmd{Bigl} accetta anche parentesi quadre e graffe
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Parentesi automatiche}
+	Per ottenere delle parentesi che si adattano alle dimensioni di quello che contengono si usa \LCmd{left(} e \LCmd{right)} e analogamente per quadre e graffe.
+	\begin{block}{Attenzione}
+		Le graffe sono un carattere riservato quindi si scrive \LCmd{left\bs\lb} e \LCmd{right\bs\rb}
+	\end{block}
+  \bigskip
+	Da utilizzare per elementi di `grosse' dimensioni quando non se ne conosce la dimensione (matrici, casi, etc)
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Parentesi automatiche}
+	Un esempio di parentesi grande
+	\begin{LaTeXcode}
+		\\[\n
+		 \hspace*{5ex}\alert{\\left(}\\frac\{1\}\{n+1\}\alert{\\right)}\textasciicircum 2\n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+			\left(\frac{1}{n+1}\right)^2
+		\]
+	\end{LaTeXoutput}
+	Ovviamente \LCmd{Bigl} accetta anche parentesi quadre e graffe
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Alcune lettere greche}
+	Scrivere lettere greche all'interno di ambienti matematici \`e estremamente semplice
+	\begin{columns}
+	  \column[t]{.3\textwidth}
+		\begin{LaTeXcode}
+			\\alpha\n
+			\\beta
+		\end{LaTeXcode}
+		\begin{LaTeXcode}
+			\\xi\n
+			\\Xi\n
+			\\gamma\n
+			\\Gamma\n
+			\\omega\n
+			\\Omega
+		\end{LaTeXcode}
+	  \column[t]{.3\textwidth}
+		\begin{LaTeXoutput}
+			$\alpha$\\
+			$\beta$
+		\end{LaTeXoutput}
+		\begin{LaTeXoutput}
+			$\xi$\\
+			$\Xi$\\
+			$\gamma$\\
+			$\Gamma$\\
+			$\omega$\\
+			$\Omega$
+		\end{LaTeXoutput}
+	\end{columns}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Simboli matematici}
+	\LaTeX\ mette a disposizione una collezione pressoch\'e completa di simboli matematici. Questi di seguito costituiscono solo un esempio minimale.
+  \begin{columns}
+  \column[t]{.4\textwidth}
+	\begin{LaTeXcode}
+		\$\\leftarrow\$\n
+		\$\\curvearrowleft\$\n
+		\$\\looparrowleft\$\n
+		\$\\precsim\$\n
+		\$\\gnapprox\$
+	\end{LaTeXcode}
+  \column[t]{.4\textwidth}
+	\begin{LaTeXoutput}
+		$\leftarrow$\\[.1ex]
+		$\curvearrowleft$\\[.1ex]
+		$\looparrowleft$\\[.1ex]
+		$\precsim$\\[.1ex]
+		$\gnapprox$
+	\end{LaTeXoutput}
+  \end{columns}
+	\begin{block}{Attenzione!}
+	Per utilizzare i simboli matematici pi\`u comuni, \`e necessario caricare il pacchetto \Lsty{amssymb}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+% \begin{frame}
+%   \frametitle{Un esempio vale pi\`u di mille parole}
+% 	\begin{center}
+% 		\alert{\texttt{esempio\_3\_7.tex}}
+% 	\end{center}
+% \end{frame}
+%-----------------------------------------------------------
+%---------------------------------------------- SUBSECTION -
+\subsection{Ambienti matematici}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{A che punto siamo}
+  \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Scrivere le equazioni}
+	L'ambiente \LCmd[]{equation} permette di numerare le equazioni
+	\begin{LaTeXcode}
+		\alert{\\begin\{equation\}}\n
+		\hspace*{5ex} F(x):= \\int\_a\textasciicircum x f(x)\bs,dx,\n
+		\alert{\\end\{equation\}}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{equation}
+			F(x):= \int_a^x f(x)\,dx,
+		\end{equation}
+	\end{LaTeXoutput}
+	\begin{block}{Attenzione!}
+		Per utilizzare questo ambiente \`e necessario caricare il pacchetto \Lsty{amsmath}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Scrivere le equazioni}
+	Con il simbolo \LCmd[]{\textsuperscript{*}} le equazioni non vengono pi\`u numerate
+	\begin{LaTeXcode}
+		\\begin\{equation\alert{\textsuperscript{*}}\}\n
+		\hspace*{5ex} F(x):= \\int\_a\textasciicircum x f(x)\bs,dx,\n
+		\\end\{equation\alert{\textsuperscript{*}}\}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{equation*}
+			F(x):= \int_a^x f(x)\,dx,
+		\end{equation*}
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Gli ambienti per le matrici}
+	Matrici	senza parentesi
+	\begin{LaTeXcode}<2->
+		matrix
+	\end{LaTeXcode}
+	Matrici con parentesi tonde (con delimitatori \LCmd[]{(}\;\LCmd[]{)})
+	\begin{LaTeXcode}<3->
+		pmatrix
+	\end{LaTeXcode}
+	Matrici con parentesi quadre (con delimitatori \LCmd[]{\ls\;\rs})
+	\begin{LaTeXcode}<4->
+		bmatrix
+	\end{LaTeXcode}
+	Matrici con parentesi graffe (con delimitatori \LCmd[]{\tlb}\;\LCmd[]{\trb})
+	\begin{LaTeXcode}<5->
+		Bmatrix
+	\end{LaTeXcode}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Gli ambienti per le matrici}
+	Matrici con barre verticali (con delimitatori \LCmd[]{|}\;\LCmd[]{|})
+	\begin{LaTeXcode}<2->
+		vmatrix
+	\end{LaTeXcode}
+	Matrici con doppie barre verticali (con delimitatori \LCmd[]{||}\;\LCmd[]{||})
+	\begin{LaTeXcode}<3->
+		Vmatrix
+	\end{LaTeXcode}
+	Matrici di piccola dimensione (per essere facilmente inserite nel testo)
+	\begin{LaTeXcode}<4->
+		smallmatrix
+	\end{LaTeXcode}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Scrivere matrici senza parentesi}
+	\begin{LaTeXcode}
+		\\[\n
+		\alert{\\begin\{matrix\}}\n
+		\hspace*{5ex} 1-x \& 2 \bs\bs\n
+		\hspace*{5ex} 3   \& 4-x \n
+		\alert{\\end\{matrix\}}\n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+		\begin{matrix}
+		1-x & 2 \\
+		3 & 4-x
+		\end{matrix}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Esempio: matrice con parentesi tonde e puntini}
+	\begin{LaTeXcode}
+		\\[\n
+		\alert{\\begin\{pmatrix\}}\n
+		\hspace*{5ex} a\_\{11\}\ \& a\_\{12\}\ \& \\dots \& a\_\{1n\}\bs\bs\n
+		\hspace*{5ex} a\_\{21\}\ \& a\_\{22\}\ \& \alert{\\dots} \& a\_\{2n\} \bs\bs\n
+		\hspace*{5ex} \\vdots \& \\vdots \& \alert{\\ddots} \& \alert{\\vdots} \bs\bs\n
+		\hspace*{5ex} a\_\{n1\}\ \& a\_\{n2\}\ \& \\dots \& a\_\{nn\}\bs\bs\n
+		\alert{\\end\{pmatrix\}}\n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+		\begin{pmatrix}
+		a_{11} & a_{12} & \dots & a_{1n} \\
+		a_{21} & a_{22} & \dots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \dots & a_{nn}
+		\end{pmatrix}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Un esempio vale pi\`u di mille parole}
+	\begin{center}
+		\alert{\texttt{esempio\_3\_8.tex}}
+	\end{center}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{L'ambiente \texttt{array}}
+	Viene utilizzato per scrivere sistemi di equazioni
+  \begin{columns}
+  \column[t]{.5\textwidth}
+	\begin{LaTeXcode}
+		\\[\n
+		\alert{\\begin\{array\}\{l\}} \n
+		\hspace*{5ex} x+y+z=0\bs\bs \n
+		\hspace*{5ex} 2x-y=1\bs\bs \n
+		\hspace*{5ex} y-4z=-3 \n
+		\alert{\\end\{array\}} \n
+		\\] 
+	\end{LaTeXcode}
+  \column[t]{.5\textwidth}
+	\begin{LaTeXoutput}
+		\vspace{4.6ex}
+		\begin{displaymath} 
+		\begin{array}{l}
+		x+y+z=0\\
+		2x-y=1\\
+		y-4z=-3 
+		\end{array} 
+		\end{displaymath} 
+		\vspace{4.6ex}
+	\end{LaTeXoutput}
+  \end{columns}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{L'ambiente \texttt{array}}
+	Il comando \LCmd{left\\\{} Aggiunge una graffa alla sola sinistra
+  \begin{columns}
+  \column[t]{.5\textwidth}
+	\begin{LaTeXcode}
+		\\[\n
+		\alert{\\left\bs\{} \n
+		\\begin\{array\}\{l\} \n
+		\hspace*{5ex} x+y+z=0\bs\bs \n
+		\hspace*{5ex} 2x-y=1\bs\bs \n
+		\hspace*{5ex} y-4z=-3 \n
+		\\end\{array\} \n
+		\alert{\\right.} \n
+		\\]
+	\end{LaTeXcode}
+  \column[t]{.5\textwidth}
+	\begin{LaTeXoutput}
+		\vspace{5.6ex}
+		\[
+		\left\{
+		\begin{array}{l}
+		x+y+z=0\\
+		2x-y=1\\
+		y-4z=-3 
+		\end{array} 
+		\right. 
+		\] 
+		\vspace{5.6ex}
+	\end{LaTeXoutput}
+  \end{columns}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{L'ambiente \texttt{cases}}
+	Viene utilizzato per scrivere definizioni costituite per casi
+	\begin{LaTeXcode}
+		\\[\n
+		f(n):=\n
+		\alert{\\begin\{cases\}} \n
+		\hspace*{5ex} 2n+1 \& \\text\{se \$n\$ \`e dispari,\}\bs\bs\n
+		\hspace*{5ex} n/2  \& \\text\{se \$n\$ \`e pari.\}\bs\bs\n
+		\alert{\\end\{cases\}} \n
+		\\]
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\[
+		f(n):=
+		\begin{cases} 
+		2n+1 & \text{se $n$ \`e dispari,}\\ 
+		n/2  & \text{se $n$ \`e pari.} \\
+		\end{cases}
+		\]
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{L'ambiente \texttt{multline}}
+	Viene utilizzato per scrivere per un'equazione da dividere in pi\`u righe, senza particolari allineamenti
+	\begin{LaTeXcode}
+		\alert{\\begin\{multline\}}\n
+		\hspace*{5ex} f=a+b+c+d+e+g+h \bs\bs\n
+		\hspace*{5ex} +i+k+l+m+n+o+\bs\bs\n
+		\hspace*{5ex} +p+q+r+s+t+u+v \n
+		\alert{\\end\{multline\}} 
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\begin{multline} 
+		f=a+b+c+d+e+g+h \\ 
+		+i+k+l+m+n+o+\\ 
+		+p+q+r+s+t+u+v 
+		\end{multline} 
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+% \begin{frame}
+%   \frametitle{L'ambiente \texttt{CD}}
+% 	Viene utilizzato per scrivere diagrammi commutativi
+%   \begin{columns}
+%   \column[t]{.5\textwidth}
+% 	\begin{LaTeXcode}
+% 		\\[\n
+% 		\alert{\\begin\{CD\}}\n
+% 		\hspace*{5ex} A	@>a>b> B \bs\bs\n
+% 		\hspace*{5ex} @VcVV	@AAdA\bs\bs\n
+% 		\hspace*{5ex} C 	@= D\n
+% 		\alert{\\end\{CD\}}\n
+% 		\\]
+% 	\end{LaTeXcode}
+%   \column[t]{.5\textwidth}
+% 	\begin{LaTeXoutput}
+% 		\vspace{3ex}
+% 		\[
+% 		\begin{CD}
+% 		A	@>a>b> B \\
+% 		@VcVV	@AAdA\\
+% 		C	@= D\\
+% 		\end{CD}
+% 		\]
+% 		\vspace{3ex}
+% 	\end{LaTeXoutput}
+%   \end{columns}
+% 	\begin{block}{Attenzione!}
+% 	\`E necessario caricare il pacchetto \Lsty{amscd}
+% 	\end{block}
+% \end{frame}
+% -----------------------------------------------------------
+% --------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Un esempio vale pi\`u di mille parole}
+	\begin{center}
+		\alert{\texttt{esempio\_3\_9.tex}}
+	\end{center}
+\end{frame}
+% -----------------------------------------------------------
+% --------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Le possibilit\`a sono molto vaste}
+	\tiny\vspace{-.08\textheight}
+	\[\xymatrix{
+	(M,h,z) \ar[dd]^{\pi_0} \ar[dr]^\alpha_\cong \ar[rr]^{\pi_1}
+	&& (M_1,h_1,0) \ar'[d]^-{\pi_{1d}}[dd] \ar[dr]^{\alpha_1}_\cong
+	\\
+	& (M',h',z')\oplus H(\Lambda^k) \ar[dd]^<(.25){\pi_0} \ar[rr]^<(.25){\pi_1}
+	&& (M'_1,h'_1,0)\oplus H(\Lambda_1^k) \ar[dd]^{\pi_{1d}}
+	\\
+	(M_0,h_0,z_0) \ar@{=}[dd] \ar[dr]^{\alpha_0}_\cong \ar'[r]^<(.6){\pi_{0d}}[rr]
+	&& (M_d,h_d,0) \ar@{=}'[d][dd] \ar[dr]^{\alpha_d}_\cong
+	\\
+	& (M'_0,h'_0,z'_0)\oplus H(\Lambda_0^k) \ar[dd]^<(.25){\beta'_0\oplus\text{id}}_<(.25)\cong
+	\ar[rr]^<(.25){\pi_{0d}}
+	&& (M'_d,h'_d,0)\oplus H(\Lambda_d^k) \ar[dd]^{\beta'_d\oplus\text{id}}_\cong
+	\\
+	(M_0,h_0,z_0) \ar[dr]^{\beta_0}_\cong \ar'[r]^<(.6){\pi_{0d}}[rr]
+	&& (M_d,h_d,0) \ar[dr]^{\beta_d}_\cong
+	\\
+	& (L,\lambda,x)\oplus H(\Lambda_0^k) \ar[rr]^{\pi_{0d}}
+	&& (L_d,\lambda_d,0)\oplus H(\Lambda_d^k)
+	}\]
+\end{frame}
+%-----------------------------------------------------------
+%------------------------------------------------- SECTION -
+\section{Riferimenti bibliografici}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Abbiamo quasi finito}
+  \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Realizzare la bibliografia}
+	La bibliogafia \`e una lista di pubblicazioni generalmente usati per preparare un documento. \\
+  \medskip
+	\LaTeX\ permette di gestire con grandissima efficienza sia la bibliografia che i riferimenti ad essa presenti nel testo, il tutto in accordo con diverse regole bibliografiche adottate.\\
+  \bigskip
+%   \onslide<2->
+	In \LaTeX\ esistono due metodi per realizzare la bibliografia.
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{L'ambiente \texttt{thebibliograpy}}
+	\begin{LaTeXcode}
+		\alert{\\begin\{thebibliograpy\}\{666\}}\n
+		\hspace*{5ex}\\bibitem\{VBF\}\n
+		\hspace*{5ex}A.\textasciitilde Vitali, L.\textasciitilde Buzzanca, P.\textasciitilde Franco,\n
+		\hspace*{5ex}\\textit\{Fisica dei Quanti\},\n
+		\hspace*{5ex}un approccio basato sulla teoria di Kirchhoff\n
+		\alert{\\end\{thebibliograpy\}}
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		\textbf{\Large Bibliografia}\\[2ex]
+		[1] A.~Vitali, L.~Buzzanca, P.~Franco, \textit{Fisica dei Quanti}, un approccio basato sulla teoria di Kirchhoff
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Citazioni}
+	\begin{LaTeXcode}
+		Oggi nel 2010, il nostro paese \`e invidiato e temuto, anche se \`e tuttora accerchiato dai centri sociali, dall'Europa bolscevica e dai molli americani del primo presidente ex nero Michael Jackson \alert{\\cite\{VBF\}}.
+	\end{LaTeXcode}
+	\begin{LaTeXoutput}
+		Oggi nel 2010, il nostro paese \`e invidiato e temuto, anche se \`e tuttora accerchiato dai centri sociali, dall'Europa bolscevica e dai molli americani del primo presidente ex nero Michael Jackson [1].
+	\end{LaTeXoutput}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Un esempio vale pi\`u di mille citazioni}
+	\begin{center}
+		\alert{\texttt{esempio\_3\_10.tex}}
+	\end{center}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Bib\TeX}
+	Bib\TeX\ permette di gestire in modo flessibile ed automatico le citazioni bibliografiche. 
+	Per far questo si ricorre a due file supplementari
+  \bigskip
+	\begin{itemize}
+		\item \Lsty{bibliografia.bib} per le referenze bibliografiche
+		\item \Lsty{stile.bst} per lo stile bibliografico adottato
+	\end{itemize}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Il file \texttt{bibliografia.bib}}
+	\begin{LaTeXcode}
+		@book\{\alert{VBF},\n
+		\hspace*{5ex} author=\{A.\textasciitilde Vitali, L.\textasciitilde Buzzanca, P.\textasciitilde Franco\},\n
+		\hspace*{5ex} title=\{Fisica dei Quanti\},\n
+		\hspace*{5ex} publisher = \{Astrophysical Journal\},\n
+		\hspace*{5ex} year = \{2010\},\n
+		\}
+	\end{LaTeXcode}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Il file \texttt{bibliografia.bib}}
+	Oltre a \LCmd[]{@book}, Bib\TeX\ permette l'uso diversi altri tipi di \textit{entries}:
+	\begin{itemize}
+		\item\Lopt{article}
+		\item\Lopt{booklet}
+		\item\Lopt{inbook}
+		\item\Lopt{incollection}
+		\item\Lopt{inproceedings}
+		\item\Lopt{manual}
+		\item\dots
+		\item\Lopt{unpublished}
+		\item\Lopt{misc}
+	\end{itemize}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Stili bibliografici}
+	Vediamo come procedere.\\
+  \medskip
+	Nel testo del documento posso inserire la bibliografia richiamando il file con le referenze e lo stile bibliografico prescelto con i comandi:
+	\begin{LaTeXcode}
+		\\bibliography\{bibliografia\}\n
+		\\bibliographystyle\{plain\}
+	\end{LaTeXcode}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Il comando \LCmd{cite} con plain}
+	Questo stile si caratterizza per le citazioni numeriche racchiuse tra parentesi quadre ed i riferimenti ordinati alfabeticamente
+	\begin{columns}
+	  \column[t]{.45\textwidth}
+		\begin{LaTeXcode}
+		\\cite\{wr\}\n 	
+		\\cite\ls e.g.\rs\ls\rs\{wr\}\n  
+		\\cite\ls pg.\textasciitilde2\rs\{wr\}\n 
+		\\cite\{wr,fs\}\n 	
+		\\nocite\{wr,fs\}
+		\end{LaTeXcode}
+	  \column[t]{.55\textwidth}
+		\begin{LaTeXoutput} % workaround maledettamente sporco
+		\char'133 1\char'135\\
+		\char'133 e.g. 1\char'135\\
+		\char'133 1, pg.\ 2\char'135\\
+		\char'133 1,2\char'135\\
+		\ \\
+		\end{LaTeXoutput}
+	\end{columns}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Il comando \LCmd{cite} con natbib}
+	Questo stile si caratterizza per le citazioni estese racchiuse tra parentesi tonde ed i riferimenti ordinati alfabeticamente %verificare
+	\begin{columns}
+	  \column[t]{.45\textwidth}
+		\begin{LaTeXcode}
+		\\citet\{wr\}\n  
+		\\citep\{wr\}\n 
+		\\citet\ls pg.\textasciitilde2\rs\{wr\}\n 
+		\\citep\ls e.g.\rs\ls\rs\n 
+		\\citep\{wr,fs\}\n 
+		\\nocite\{wr\}
+		\end{LaTeXcode}
+	  \column[t]{.55\textwidth}
+		\begin{LaTeXoutput} % workaround maledettamente sporco
+		Wrodstat (2000)\\
+		(Wrodstat, 2000)\\
+		Wrodstat (2000, pg. 2)\\
+		(e.g. Wrodstat, 2000)\\
+		(Wrodstat, 2000; Fish, 1999)\\
+		\ \\
+		\end{LaTeXoutput}
+	\end{columns}
+  \onslide<2->
+	\begin{block}{Attenzione!}
+	In questo caso \`e necessario caricare anche il pacchetto \Lsty{natbib}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Altri stili bibliografici}
+	Citazioni alfanumeriche con le iniziali dell'autore e l'anno di pubblicazione
+	\begin{LaTeXcode}<2->
+		alpha
+	\end{LaTeXcode}
+	Citazioni numeriche e riferimenti ordinati nell'ordine in cui si trovano
+	\begin{LaTeXcode}<3->
+		unstr
+	\end{LaTeXcode}
+	Citazioni in \textsc{Small Caps}
+	\begin{LaTeXcode}<4->
+		acm
+	\end{LaTeXcode}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{\dots e molti altri ancora}
+	\vspace*{-2ex}\begin{columns}
+	  \column[t]{.21\textwidth}
+		\begin{LaTeXoutput}
+			\Lopt{ieeetr}\\
+			\Lopt{unsrt}\\
+			\Lopt{IEEE}\\
+			\Lopt{ama}\\
+			\Lopt{cj}\\
+			\Lopt{nar}\\
+			\Lopt{nature}\\
+			\Lopt{phjcp}\\
+			\Lopt{is-unsrt}\\	
+			\Lopt{plain}\\
+			\Lopt{abbrv}
+		\end{LaTeXoutput}
+	  \column[t]{.25\textwidth}
+		\begin{LaTeXoutput}
+			\Lopt{acm}\\
+			\Lopt{siam}\\
+			\Lopt{jbact}\\
+			\Lopt{amsplain}\\
+			\Lopt{finplain}\\
+			\Lopt{IEEEannot}\\
+			\Lopt{is-abbrv }\\	
+			\Lopt{is-plain}\\
+			\Lopt{annotation}\\
+			\Lopt{plainyr}\\
+			\Lopt{decsci}
+		\end{LaTeXoutput}
+	  \column[t]{.21\textwidth}
+		\begin{LaTeXoutput}
+			\Lopt{jtbnew}\\
+			\Lopt{neuron}\\
+			\Lopt{cell}\\
+			\Lopt{jas99}\\
+			\Lopt{abbrvnat}\\	
+			\Lopt{ametsoc}\\
+			\Lopt{apalike}\\
+			\Lopt{jqt1999}\\
+			\Lopt{plainnat}\\
+			\Lopt{jtb}\\
+			\Lopt{humanbio}
+		\end{LaTeXoutput}
+	  \column[t]{.27\textwidth}
+		\begin{LaTeXoutput}
+			\Lopt{these}\\
+			\Lopt{chicagoa}\\
+			\Lopt{development }\\	
+			\Lopt{unsrtnat}\\
+			\Lopt{amsalpha}\\
+			\Lopt{alpha}\\
+			\Lopt{annotate}\\
+			\Lopt{is-alpha}\\
+			\Lopt{wmaainf}\\
+			\Lopt{alphanum}\\
+			\Lopt{apasoft} 
+		\end{LaTeXoutput}
+	\end{columns}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Un esempio vale pi\`u di mille citazioni}
+	\begin{center}
+		\alert{\texttt{esempio\_3\_11.tex}}
+	\end{center}
+\end{frame}
+%-----------------------------------------------------------
+%--------------------------------------------------- SLIDE -
+\begin{frame}
+  \frametitle{Per oggi abbiamo finito}
+	\begin{center}
+		\huge
+		Grazie e alla prossima lezione
+	\end{center}
+  \medskip
+	\begin{block}{Cosa impareremo la prossima volta}
+		\begin{itemize}
+			\item inserire e disegnare le \textbf{figure}
+			\item fare delle bellissime \textbf{presentazioni a video}
+% 			\item iniziamo a lavorare sulla tesi di laurea 
+			\item come \textbf{tirarvi fuori dai guai} con le vostre gambe
+		\end{itemize}
+	\end{block}
+\end{frame}
+%-----------------------------------------------------------
+%----------------------------------------------------- END -
+\end{document}

@@ -1,0 +1,53 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[italian]{babel}
+\usepackage[utf8x]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{lipsum} 
+
+% \usepackage{float} % permette di forzare il posizionamento dei float
+
+
+\begin{document}
+
+
+% \lipsum[1]
+
+
+\begin{tabular}{l r r}
+Votantonio	&	12 &	45,3 \\
+Votantonio	&	15 &	78,5 \\
+Votantonio	&	17 & 	34,0 \\
+\end{tabular}
+
+
+% \lipsum[1]
+
+
+ \begin{table}[htb] % \caption{Risultati delle elezioni}
+ \begin{tabular}{l r r}
+ Votantonio	&	12 &	45,3 \\
+ Votantonio	&	15 &	78,5 \\
+ Votantonio	&	17 & 	34,0 \\
+ \end{tabular}
+ \end{table}
+
+
+% \lipsum[1]
+
+
+
+ \begin{table}[htb] \caption{Risultati delle elezioni}
+   \centering
+ 	\begin{tabular}{p{.3\textwidth} r r}\hline
+ 		\multicolumn{1}{l}{Candidati}
+ 		&\multicolumn{1}{c}{Votanti}
+ 		&\multicolumn{1}{c}{\%}\\\hline
+ 		Antonio La Trippa	&	1.200 &	27,3 \\
+ 		Antonio La Trippa	&	1.500 &	34,1 \\
+ 		Antonio La Trippa	&	1.700 & 38,6 \\\hline
+ 	\end{tabular}
+ \end{table}
+
+
+\end{document}
